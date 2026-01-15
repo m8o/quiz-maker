@@ -1,3 +1,4 @@
+import styles from "./Overview.module.scss";
 import QuizCard from "../../components/QuizCard/QuizCard";
 import Paper from "@mui/material/Paper";
 import { IconButton, Typography } from "@mui/material";
@@ -49,43 +50,23 @@ const quizzes = [
     title: "Testing in React",
   },
 ];
+
 const Overview = () => {
-	return (
-		<div style={{ position: "relative", minHeight: "100vh" }}>
-			<IconButton
-				sx={{
-					position: "fixed",
-					bottom: "50px",
-					right: "50px",
-					backgroundColor: "primary.main",
-					color: "white",
-					boxShadow: 3,
-					"&:hover": {
-						backgroundColor: "primary.dark",
-					},
-				}}
-			>
-				<AddIcon />
-			</IconButton>
-			<Paper
-				style={{
-					margin: "50px",
-					padding: "25px",
-					display: "flex",
-					justifyContent: "center",
-					flexDirection: "column",
-					gap: "12px",
-				}}
-			>
-				<Typography variant="h4" align="center" gutterBottom>
-					Quiz Overview
-				</Typography>
-				{quizzes.map((quiz) => (
-					<QuizCard key={quiz.id} title={quiz.title} />
-				))}
-			</Paper>
-		</div>
-	);
+  return (
+    <div className={styles.container}>
+      <IconButton className={styles.fabButton}>
+        <AddIcon />
+      </IconButton>
+      <Paper className={styles.contentPaper}>
+        <Typography variant="h4" align="center" gutterBottom>
+          Quiz Overview
+        </Typography>
+        {quizzes.map((quiz) => (
+          <QuizCard key={quiz.id} title={quiz.title} />
+        ))}
+      </Paper>
+    </div>
+  );
 };
 
 export default Overview;

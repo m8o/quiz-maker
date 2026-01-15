@@ -1,61 +1,43 @@
-import React from "react";
-import { Card, CardContent, Box, IconButton, styled } from "@mui/material";
+import styles from "./QuizCard.module.scss";
+import { Paper, Typography, IconButton, Box } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 const iconConfig = [
-  { icon: PlayArrowIcon, color: "success", label: "play" },
-  { icon: EditIcon, color: "primary", label: "edit" },
-  { icon: DeleteIcon, color: "error", label: "delete" },
-];
-const BorderedIconButton = styled(IconButton)(({ theme }) => ({
-  boxShadow: theme.shadows[1],
-  "&:hover": {
-    boxShadow: theme.shadows[4],
+  {
+    icon: PlayArrowIcon,
+
+    className: styles.play,
+    label: "play",
   },
-}));
-const QuizCard = ({ title, onPlay, onEdit, onDelete }) => {
+  { icon: EditIcon, className: styles.edit, label: "edit" },
+  {
+    icon: DeleteIcon,
+
+    className: styles.delete,
+    label: "delete",
+  },
+];
+const QuizCard = ({ title, onDelete, onEdit, onPlay }) => {
   return (
-    <Card sx={{ maxWidth: "800px", alignSelf: "center", width: "100%" }}>
-      <CardContent>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{
-            "&hover": {
-              cursor: "pointer",
-            },
-          }}
-          onClick={onPlay}
-        >
-          <Box
-            sx={{
-              typography: "h6",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-              // maxWidth: "70%", // Adjust as needed
-            }}
+    <Paper className={styles.cardContainer} elevation={1}>
+      <Typography variant="h6" className={styles.title}>
+        {title}
+      </Typography>
+      <Box display="flex" gap={1}>
+        {iconConfig.map(({ icon: Icon, className, label }, i) => (
+          <IconButton
+            key={label}
+            size="small"
+            className={`${styles.actionButton} ${className}`}
+            onClick={i === 0 ? onPlay : i === 1 ? onEdit : onDelete}
+            aria-label={label}
           >
-            {title}
-          </Box>
-          <Box display="flex" gap={1}>
-            {iconConfig.map(({ icon: Icon, color, label }, i) => (
-              <BorderedIconButton
-                key={label}
-                size="small"
-                color={color}
-                onClick={i === 0 ? onPlay : i === 1 ? onEdit : onDelete}
-                aria-label={label}
-              >
-                <Icon />
-              </BorderedIconButton>
-            ))}
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
+            <Icon />
+          </IconButton>
+        ))}
+      </Box>
+    </Paper>
   );
 };
 

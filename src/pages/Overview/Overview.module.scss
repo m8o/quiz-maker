@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.fabButton {
+  z-index: 100;
+  position: fixed;
+  bottom: 40px;
+  right: 35px;
+  background-color: var(--mui-palette-primary-main);
+  color: var(--mui-palette-text-white);
+  box-shadow: var(--mui-shadows-1);
+  &:hover {
+    background-color: var(--mui-palette-primary-dark);
+    box-shadow: var(--mui-shadows-4);
+  }
+}
+
+.contentPaper {
+  margin: 25px;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: var(--mui-shape-borderRadius);
+}

@@ -1,0 +1,40 @@
+.cardContainer {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: var(--mui-shape-borderRadius);
+  background-color: var(--mui-palette-background-card);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mui-shadows-4);
+    border-color: var(--mui-palette-primary-main);
+  }
+}
+
+.title {
+  color: var(--mui-palette-text-primary);
+  font-weight: 600;
+}
+
+.actionButton {
+  box-shadow: var(--mui-shadows-1);
+  background-color: var(--mui-palette-background-button);
+  transition: background-color 0.2s, transform 0.1s;
+  &:hover {
+    box-shadow: var(--mui-shadows-4);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+  &.play {
+    color: var(--mui-palette-success-main);
+  }
+  &.edit {
+    color: var(--mui-palette-primary-main);
+  }
+  &.delete {
+    color: var(--mui-palette-error-main);
+  }
+}
