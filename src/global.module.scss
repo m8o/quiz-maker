@@ -3,8 +3,8 @@
   margin: 12px;
   padding: 25px 25px 50px 25px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  flex-grow: 1;
   gap: 12px;
   border-radius: var(--mui-shape-borderRadius);
   &.overview {
