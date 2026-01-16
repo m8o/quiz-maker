@@ -1,4 +1,5 @@
 import styles from "./Overview.module.scss";
+import globalStyles from "../../global.module.scss";
 import QuizCard from "../../components/QuizCard/QuizCard";
 import Paper from "@mui/material/Paper";
 import { IconButton, Typography } from "@mui/material";
@@ -57,7 +58,9 @@ const Overview = () => {
       <IconButton className={styles.fabButton}>
         <AddIcon />
       </IconButton>
-      <Paper className={styles.contentPaper}>
+      <Paper
+        className={`${globalStyles.contentPaper} ${globalStyles.overview}`}
+      >
         <Typography variant="h4" align="center" gutterBottom>
           Quiz Overview
         </Typography>

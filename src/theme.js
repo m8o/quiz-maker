@@ -5,7 +5,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: "#386641",
-      contrastText: "#f2e8cf",
+      contrastText: "#ffffff",
     },
     secondary: {
       main: "#6a994e",
@@ -28,6 +28,7 @@ const theme = createTheme({
       primary: "#386641",
       white: "#ffffff",
     },
+    divider: "#386641",
   },
   shape: {
     borderRadius: 8,

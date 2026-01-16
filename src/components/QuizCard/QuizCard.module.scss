@@ -16,10 +16,12 @@
 .title {
   color: var(--mui-palette-text-primary);
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .actionButton {
-  box-shadow: var(--mui-shadows-1);
   background-color: var(--mui-palette-background-button);
   transition: background-color 0.2s, transform 0.1s;
   &:hover {
