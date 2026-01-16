@@ -4,6 +4,7 @@ import QuizCard from "../../components/QuizCard/QuizCard";
 import Paper from "@mui/material/Paper";
 import { IconButton, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router";
 
 const quizzes = [
   {
@@ -53,9 +54,13 @@ const quizzes = [
 ];
 
 const Overview = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
-      <IconButton className={styles.fabButton}>
+      <IconButton
+        onClick={() => navigate("/create")}
+        className={styles.fabButton}
+      >
         <AddIcon />
       </IconButton>
       <Paper
