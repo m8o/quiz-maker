@@ -1,0 +1,17 @@
+@use "./_mixins.scss" as *;
+.contentPaper {
+  margin: 12px;
+  padding: 25px 25px 50px 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
+  border-radius: var(--mui-shape-borderRadius);
+  &.overview {
+    padding-top: 25px;
+  }
+  @include tablet {
+    margin: 25px;
+    padding: 50px;
+  }
+}

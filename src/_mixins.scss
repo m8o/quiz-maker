@@ -1,0 +1,7 @@
+$sm: 600px;
+
+@mixin tablet {
+  @media (min-width: #{$sm}) {
+    @content;
+  }
+}

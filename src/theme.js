@@ -1,10 +1,11 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  cssVariables: true,
   palette: {
     primary: {
       main: "#386641",
-      contrastText: "#f2e8cf",
+      contrastText: "#ffffff",
     },
     secondary: {
       main: "#6a994e",
@@ -17,12 +18,17 @@ const theme = createTheme({
       main: "#bc4749",
     },
     background: {
-      default: "#f2e8cf",
-      paper: "#ffffff",
+      default: "#ffffff",
+      paper: "#f2e8cf",
+      card: "#ffffff",
+      button: "#ffffff",
+      dark: "#386641",
     },
     text: {
       primary: "#386641",
+      white: "#ffffff",
     },
+    divider: "#386641",
   },
   shape: {
     borderRadius: 8,
