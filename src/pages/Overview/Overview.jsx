@@ -5,56 +5,17 @@ import Paper from "@mui/material/Paper";
 import { IconButton, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router";
-
-const quizzes = [
-  {
-    id: 1,
-    title: "Sample Quiz",
-  },
-  {
-    id: 2,
-    title: "JavaScript Basics",
-  },
-  {
-    id: 3,
-    title: "React Fundamentals",
-  },
-  {
-    id: 4,
-    title: "CSS Styling",
-  },
-  {
-    id: 5,
-    title: "HTML Essentials",
-  },
-  {
-    id: 6,
-    title: "Web APIs",
-  },
-  {
-    id: 7,
-    title: "TypeScript Advanced",
-  },
-  {
-    id: 8,
-    title: "State Management",
-  },
-  {
-    id: 9,
-    title: "Components Design",
-  },
-  {
-    id: 10,
-    title: "Performance Optimization",
-  },
-  {
-    id: 11,
-    title: "Testing in React",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchQuizzes } from "../../features/quizzes/quizzesSlice";
 
 const Overview = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { items: quizzes } = useSelector((state) => state.quizzes);
+  useEffect(() => {
+    dispatch(fetchQuizzes());
+  }, [dispatch]);
   return (
     <div className={styles.container}>
       <IconButton
@@ -69,9 +30,11 @@ const Overview = () => {
         <Typography variant="h4" align="center" gutterBottom>
           Quiz Overview
         </Typography>
-        {quizzes.map((quiz) => (
-          <QuizCard key={quiz.id} title={quiz.title} />
-        ))}
+        {Array.isArray(quizzes) ? (
+          quizzes.map((quiz) => <QuizCard key={quiz.id} title={quiz.name} />)
+        ) : (
+          <Typography>No quizzes available.</Typography>
+        )}
       </Paper>
     </div>
   );
