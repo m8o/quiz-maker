@@ -20,7 +20,7 @@ let quizzes = [...initialQuizzes];
 export const mockClient = {
   getQuizzes: async () => quizzes,
   createQuiz: async (quiz) => {
-    quizzes.push(quiz);
+    quizzes = [...quizzes, { ...quiz, id: Date.now() }];
     const newQuestions = quiz.questions.filter(
       (q) => !questions.find((existingQ) => existingQ.id === q.id)
     );
