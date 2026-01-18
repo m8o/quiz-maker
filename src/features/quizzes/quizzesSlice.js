@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../api";
 
 export const fetchQuizzes = createAsyncThunk("quizzes/fetchAll", async () => {
-  const response = await api.getQuizzes();
-  return response;
+  return await api.getQuizzes();
 });
 
 export const createQuiz = createAsyncThunk(
@@ -12,6 +11,10 @@ export const createQuiz = createAsyncThunk(
     return await api.createQuiz(quizData);
   }
 );
+
+export const deleteQuiz = createAsyncThunk("quizzes/delete", async (quizID) => {
+  return await api.deleteQuiz(quizID);
+});
 
 const quizzesSlice = createSlice({
   name: "quizzes",
@@ -24,6 +27,9 @@ const quizzesSlice = createSlice({
       })
       .addCase(createQuiz.fulfilled, (state, action) => {
         state.items.push(action.payload);
+      })
+      .addCase(deleteQuiz.fulfilled, (state, action) => {
+        state.items = state.items.filter((quiz) => quiz.id !== action.meta.arg);
       });
   },
 });
