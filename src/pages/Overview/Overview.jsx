@@ -17,16 +17,14 @@ const Overview = () => {
     dispatch(fetchQuizzes());
   }, [dispatch]);
   return (
-    <div className={styles.container}>
+    <>
       <IconButton
         onClick={() => navigate("/create")}
         className={styles.fabButton}
       >
         <AddIcon />
       </IconButton>
-      <Paper
-        className={`${globalStyles.contentPaper} ${globalStyles.overview}`}
-      >
+      <Paper className={`${globalStyles.contentPaper} ${styles.overview}`}>
         <Typography variant="h4" align="center" gutterBottom>
           Quiz Overview
         </Typography>
@@ -36,7 +34,7 @@ const Overview = () => {
           <Typography>No quizzes available.</Typography>
         )}
       </Paper>
-    </div>
+    </>
   );
 };
 
