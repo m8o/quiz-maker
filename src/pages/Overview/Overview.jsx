@@ -42,9 +42,9 @@ const Overview = () => {
       </IconButton>
       <Paper className={`${globalStyles.contentPaper} ${styles.overview}`}>
         <Typography variant="h4" align="center" gutterBottom>
-          Quiz Overview
+          Quiz Maker
         </Typography>
-        {Array.isArray(quizzes) ? (
+        {Array.isArray(quizzes) && quizzes.length > 0 ? (
           quizzes.map((quiz) => (
             <QuizCard
               key={quiz.id}
