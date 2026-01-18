@@ -1,3 +1,4 @@
+import globalStyles from "../../global.module.scss";
 import styles from "./QuizForm.module.scss";
 import { useState } from "react";
 import {
@@ -125,7 +126,7 @@ const QuizForm = ({
             Create Quiz
           </Button>
           <Button
-            className={styles.cancelButton}
+            className={globalStyles.cancelButton}
             onClick={() => navigate("/")}
             variant="outlined"
           >
