@@ -6,14 +6,25 @@ export const fetchQuizzes = createAsyncThunk("quizzes/fetchAll", async () => {
   return response;
 });
 
+export const createQuiz = createAsyncThunk(
+  "quizzes/create",
+  async (quizData) => {
+    return await api.createQuiz(quizData);
+  }
+);
+
 const quizzesSlice = createSlice({
   name: "quizzes",
   initialState: { items: [] },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchQuizzes.fulfilled, (state, action) => {
-      state.items = action.payload;
-    });
+    builder
+      .addCase(fetchQuizzes.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(createQuiz.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      });
   },
 });
 export default quizzesSlice.reducer;
