@@ -7,13 +7,17 @@ import {
   StyledEngineProvider,
   ThemeProvider,
 } from "@mui/material";
+import { Provider } from "react-redux";
+import { store } from "./app/store.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </ThemeProvider>
     </StyledEngineProvider>
   </StrictMode>

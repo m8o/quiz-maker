@@ -12,14 +12,20 @@ import {
 import { useNavigate } from "react-router";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const QuizForm = ({ title, initialQuestions, initialQuizName = "" }) => {
+const QuizForm = ({
+  title,
+  initialQuestions,
+  initialQuizName = "",
+  handleRequest,
+}) => {
   const [quizName, setQuizName] = useState(initialQuizName);
   const [questions, setQuestions] = useState(initialQuestions);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Quiz name:", quizName);
+    const success = await handleRequest({ name: quizName, questions });
+    if (success) navigate("/");
   };
   const handleDeleteQuestion = (index) => {
     setQuestions((currentQuestions) => {

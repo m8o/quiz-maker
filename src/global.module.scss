@@ -7,9 +7,6 @@
   flex-grow: 1;
   gap: 12px;
   border-radius: var(--mui-shape-borderRadius);
-  &.overview {
-    padding-top: 25px;
-  }
   @include tablet {
     margin: 25px;
     padding: 50px;
