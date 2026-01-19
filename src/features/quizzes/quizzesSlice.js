@@ -25,7 +25,7 @@ export const getSingleQuiz = createAsyncThunk(
 
 const quizzesSlice = createSlice({
   name: "quizzes",
-  initialState: { items: [], singleItem: null },
+  initialState: { items: [], singleItem: null, status: "idle" },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -38,8 +38,15 @@ const quizzesSlice = createSlice({
       .addCase(deleteQuiz.fulfilled, (state, action) => {
         state.items = state.items.filter((quiz) => quiz.id !== action.meta.arg);
       })
+      .addCase(getSingleQuiz.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(getSingleQuiz.fulfilled, (state, action) => {
         state.singleItem = action.payload;
+        state.status = "succeeded";
+      })
+      .addCase(getSingleQuiz.rejected, (state) => {
+        state.status = "failed";
       });
   },
 });

@@ -9,7 +9,7 @@ import { useParams } from "react-router";
 const EditQuiz = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const { singleItem: quiz } = useSelector((state) => state.quizzes);
+  const { singleItem: quiz, status } = useSelector((state) => state.quizzes);
   useEffect(() => {
     dispatch(getSingleQuiz(params.id));
   }, [dispatch]);
@@ -23,13 +23,15 @@ const EditQuiz = () => {
   };
   return (
     <Paper className={globalStyles.contentPaper}>
-      {quiz ? (
+      {quiz && status === "succeeded" ? (
         <QuizForm
           title={`Edit quiz ${quiz.id}`}
           initialQuizName={quiz.name}
           initialQuestions={quiz.questions}
           handleRequest={handleUpdate}
         />
+      ) : status === "failed" ? (
+        <Typography>Failed to get the quiz</Typography>
       ) : (
         <Typography>Loading quiz...</Typography>
       )}
