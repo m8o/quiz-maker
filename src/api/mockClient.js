@@ -27,10 +27,7 @@ export const mockClient = {
     questions = questions.concat(newQuestions);
     return "success";
   },
-  getSingleQuiz: async (id) => {
-    quizzes.find((quiz) => quiz.id === id);
-    return "success";
-  },
+  getSingleQuiz: async (id) => quizzes.find((quiz) => quiz.id === parseInt(id)),
   updateSingleQuiz: async (quiz) => {
     quizzes = quizzes.map((q) => (q.id === quiz.id ? quiz : q));
     const newQuestions = quiz.questions.filter(

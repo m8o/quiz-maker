@@ -19,7 +19,8 @@ const Overview = () => {
   useEffect(() => {
     dispatch(fetchQuizzes());
   }, [dispatch]);
-  const openModalHandler = (quizID) => {
+  const openModalHandler = (e, quizID) => {
+    e.stopPropagation();
     setIsModalOpen(true);
     setDeletionQuizID(quizID);
   };
@@ -31,6 +32,10 @@ const Overview = () => {
     dispatch(deleteQuiz(deletionQuizID));
     closeModalHandler();
     //Polish: Loading state could be added here to improve UX
+  };
+  const editNavigatehandler = (e, quizID) => {
+    e.stopPropagation();
+    navigate(`/edit/${quizID}`);
   };
   return (
     <>
@@ -51,6 +56,7 @@ const Overview = () => {
               id={quiz.id}
               title={quiz.name}
               onDeleteClick={openModalHandler}
+              onEditClick={editNavigatehandler}
             />
           ))
         ) : (

@@ -16,9 +16,16 @@ export const deleteQuiz = createAsyncThunk("quizzes/delete", async (quizID) => {
   return await api.deleteQuiz(quizID);
 });
 
+export const getSingleQuiz = createAsyncThunk(
+  "quizzes/getSingle",
+  async (quizID) => {
+    return await api.getSingleQuiz(quizID);
+  }
+);
+
 const quizzesSlice = createSlice({
   name: "quizzes",
-  initialState: { items: [] },
+  initialState: { items: [], singleItem: null },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -30,6 +37,9 @@ const quizzesSlice = createSlice({
       })
       .addCase(deleteQuiz.fulfilled, (state, action) => {
         state.items = state.items.filter((quiz) => quiz.id !== action.meta.arg);
+      })
+      .addCase(getSingleQuiz.fulfilled, (state, action) => {
+        state.singleItem = action.payload;
       });
   },
 });
