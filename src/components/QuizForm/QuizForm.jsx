@@ -15,8 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const QuizForm = ({
   title,
-  initialQuestions,
-  initialQuizName = "",
+  quizData: { name: initialQuizName, questions: initialQuestions, id } = {},
   handleRequest,
 }) => {
   const [quizName, setQuizName] = useState(initialQuizName);
@@ -25,7 +24,7 @@ const QuizForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await handleRequest({ name: quizName, questions });
+    const success = await handleRequest({ name: quizName, questions, id });
     if (success) navigate("/");
   };
   const handleDeleteQuestion = (index) => {
@@ -123,7 +122,7 @@ const QuizForm = ({
             variant="contained"
             type="submit"
           >
-            Create Quiz
+            Save
           </Button>
           <Button
             className={globalStyles.cancelButton}

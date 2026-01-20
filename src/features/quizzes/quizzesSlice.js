@@ -23,6 +23,13 @@ export const getSingleQuiz = createAsyncThunk(
   }
 );
 
+export const updateSingleQuiz = createAsyncThunk(
+  "quizzes/updateSingle",
+  async (quizData) => {
+    return await api.updateSingleQuiz(quizData);
+  }
+);
+
 const quizzesSlice = createSlice({
   name: "quizzes",
   initialState: { items: [], singleItem: null, status: "idle" },
@@ -47,6 +54,13 @@ const quizzesSlice = createSlice({
       })
       .addCase(getSingleQuiz.rejected, (state) => {
         state.status = "failed";
+      })
+      .addCase(updateSingleQuiz.fulfilled, (state, action) => {
+        state.items = state.items.map((quiz) => {
+          if (quiz.id === action.payload.id) {
+            return action.payload;
+          }
+        });
       });
   },
 });
