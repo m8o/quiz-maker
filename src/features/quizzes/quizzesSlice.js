@@ -60,6 +60,7 @@ const quizzesSlice = createSlice({
           if (quiz.id === action.payload.id) {
             return action.payload;
           }
+          return quiz;
         });
       });
   },
