@@ -1,3 +1,4 @@
+import globalStyles from "../../global.module.scss";
 import styles from "./QuizCard.module.scss";
 import { Paper, Typography, IconButton, Box } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -7,14 +8,14 @@ const iconConfig = [
   {
     icon: PlayArrowIcon,
 
-    className: styles.play,
+    className: styles.playActionButton,
     label: "play",
   },
-  { icon: EditIcon, className: styles.edit, label: "edit" },
+  { icon: EditIcon, className: styles.editActionButton, label: "edit" },
   {
     icon: DeleteIcon,
 
-    className: styles.delete,
+    className: styles.deleteActionButton,
     label: "delete",
   },
 ];
@@ -33,7 +34,7 @@ const QuizCard = ({ id, title, onDeleteClick, onEditClick, onPlay }) => {
           <IconButton
             key={label}
             size="small"
-            className={`${styles.actionButton} ${className}`}
+            className={`${globalStyles.roundActionButton} ${className}`}
             onClick={(e) =>
               i === 0
                 ? onPlay

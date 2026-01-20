@@ -82,7 +82,7 @@ const QuizForm = ({
                   </Typography>
                   <IconButton
                     size="small"
-                    className={`${styles.deleteButton}`}
+                    className={`${styles.deleteButton} ${globalStyles.roundActionButton}`}
                     onClick={() => handleDeleteQuestion(index)}
                     aria-label={"delete"}
                   >
