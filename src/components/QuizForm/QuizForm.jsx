@@ -1,3 +1,4 @@
+import globalStyles from "../../global.module.scss";
 import styles from "./QuizForm.module.scss";
 import { useState } from "react";
 import {
@@ -14,8 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const QuizForm = ({
   title,
-  initialQuestions,
-  initialQuizName = "",
+  quizData: { name: initialQuizName, questions: initialQuestions, id } = {},
   handleRequest,
 }) => {
   const [quizName, setQuizName] = useState(initialQuizName);
@@ -24,7 +24,7 @@ const QuizForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const success = await handleRequest({ name: quizName, questions });
+    const success = await handleRequest({ name: quizName, questions, id });
     if (success) navigate("/");
   };
   const handleDeleteQuestion = (index) => {
@@ -82,7 +82,7 @@ const QuizForm = ({
                   </Typography>
                   <IconButton
                     size="small"
-                    className={`${styles.deleteButton}`}
+                    className={`${styles.deleteButton} ${globalStyles.roundActionButton}`}
                     onClick={() => handleDeleteQuestion(index)}
                     aria-label={"delete"}
                   >
@@ -122,10 +122,10 @@ const QuizForm = ({
             variant="contained"
             type="submit"
           >
-            Create Quiz
+            Save
           </Button>
           <Button
-            className={styles.cancelButton}
+            className={globalStyles.cancelButton}
             onClick={() => navigate("/")}
             variant="outlined"
           >

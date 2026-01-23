@@ -4,12 +4,15 @@ import QuizForm from "../../components/QuizForm/QuizForm";
 import { Paper } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { createQuiz } from "../../features/quizzes/quizzesSlice";
-const questions = [
-  {
-    question: "",
-    answer: "",
-  },
-];
+const emptyQuizData = {
+  name: "",
+  questions: [
+    {
+      question: "",
+      answer: "",
+    },
+  ],
+};
 const CreateQuiz = () => {
   const dispatch = useDispatch();
   const handleCreate = async (quizData) => {
@@ -24,7 +27,7 @@ const CreateQuiz = () => {
     <Paper className={globalStyles.contentPaper}>
       <QuizForm
         title="Create a new quiz"
-        initialQuestions={questions}
+        quizData={emptyQuizData}
         handleRequest={handleCreate}
       />
     </Paper>

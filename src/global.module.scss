@@ -12,3 +12,16 @@
     padding: 50px;
   }
 }
+.cancelButton {
+  background-color: var(--mui-palette-background-default);
+}
+.roundActionButton {
+  background-color: var(--mui-palette-background-button);
+  transition: background-color 0.2s, transform 0.1s;
+  &:hover {
+    box-shadow: var(--mui-shadows-4);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

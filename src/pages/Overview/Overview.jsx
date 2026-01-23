@@ -6,16 +6,37 @@ import { IconButton, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchQuizzes } from "../../features/quizzes/quizzesSlice";
+import { useEffect, useState } from "react";
+import { deleteQuiz, fetchQuizzes } from "../../features/quizzes/quizzesSlice";
+import ConfirmationModal from "../../components/ConfirmationModal/ConfirmationModal";
 
 const Overview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [deletionQuizID, setDeletionQuizID] = useState();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { items: quizzes } = useSelector((state) => state.quizzes);
   useEffect(() => {
     dispatch(fetchQuizzes());
   }, [dispatch]);
+  const openModalHandler = (e, quizID) => {
+    e.stopPropagation();
+    setIsModalOpen(true);
+    setDeletionQuizID(quizID);
+  };
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
+    setDeletionQuizID(null);
+  };
+  const onConfirmDeletionHandler = () => {
+    dispatch(deleteQuiz(deletionQuizID));
+    closeModalHandler();
+    //Polish: Loading state could be added here to improve UX
+  };
+  const editNavigatehandler = (e, quizID) => {
+    e.stopPropagation();
+    navigate(`/edit/${quizID}`);
+  };
   return (
     <>
       <IconButton
@@ -26,13 +47,26 @@ const Overview = () => {
       </IconButton>
       <Paper className={`${globalStyles.contentPaper} ${styles.overview}`}>
         <Typography variant="h4" align="center" gutterBottom>
-          Quiz Overview
+          Quiz Maker
         </Typography>
-        {Array.isArray(quizzes) ? (
-          quizzes.map((quiz) => <QuizCard key={quiz.id} title={quiz.name} />)
+        {Array.isArray(quizzes) && quizzes.length > 0 ? (
+          quizzes.map((quiz) => (
+            <QuizCard
+              key={quiz.id}
+              id={quiz.id}
+              title={quiz.name}
+              onDeleteClick={openModalHandler}
+              onEditClick={editNavigatehandler}
+            />
+          ))
         ) : (
           <Typography>No quizzes available.</Typography>
         )}
+        <ConfirmationModal
+          open={isModalOpen}
+          onClose={closeModalHandler}
+          onConfirm={onConfirmDeletionHandler}
+        />
       </Paper>
     </>
   );
