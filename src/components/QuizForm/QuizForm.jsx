@@ -110,12 +110,23 @@ const QuizForm = ({
               </CardContent>
             </Card>
           ))}
-        <Button
-          className={styles.addQuestionButton}
-          onClick={() => setQuestions([...questions, {}])}
-        >
-          <Typography variant="h4">+</Typography>
-        </Button>
+
+        <Box display="flex" gap={1} className={styles.addButtons}>
+          <Button
+            className={styles.addQuestionButton}
+            onClick={() => setQuestions([...questions, { id: Date.now() }])}
+          >
+            <Typography variant="button">add new question</Typography>
+          </Button>
+          <Button
+            className={styles.addQuestionButton}
+            onClick={() => setQuestions([...questions, { id: Date.now() }])}
+          >
+            <Typography variant="button">
+              add from existing questions
+            </Typography>
+          </Button>
+        </Box>
         <Box display="flex" gap={1} className={styles.actionButtons}>
           <Button
             className={styles.createQuizButton}

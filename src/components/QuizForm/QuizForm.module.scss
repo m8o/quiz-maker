@@ -1,14 +1,14 @@
+@use "../../mixins.scss" as *;
 .deleteButton {
   color: var(--mui-palette-error-main);
 }
 .addQuestionButton {
+  min-height: 50px;
   padding: 0;
   max-width: 1200px;
-  width: 100%;
   display: flex;
   justify-content: center;
   margin: auto;
-  margin-bottom: 24px;
   border: 1px dashed var(--mui-palette-divider);
   &:hover {
     background-color: var(--mui-palette-action-hover);
@@ -28,6 +28,23 @@
 }
 .cardTitle {
   margin-bottom: 16px;
+  .nameCard & {
+    width: fit-content;
+    margin: 0px auto 16px;
+  }
+}
+.addButtons {
+  flex-direction: column;
+  margin-bottom: 24px;
+  > .addQuestionButton {
+    width: 100%;
+  }
+  @include tablet {
+    flex-direction: row;
+    > .addQuestionButton {
+      width: 50%;
+    }
+  }
 }
 .actionButtons {
   display: flex;
@@ -37,4 +54,5 @@
 }
 .cancelButton {
   background-color: var(--mui-palette-background-default);
+  max-width: 120px;
 }
