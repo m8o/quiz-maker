@@ -1,11 +1,11 @@
 import React from "react";
 import { MODAL_TYPES } from "../../features/ui/modalTypes";
-import ConfirmationModal from "../ConfirmationModal copy/ConfirmationModal";
+import DeleteConfirmationModal from "./DeleteConfirmationModal/DeleteConfirmationModal";
 import ExistingQuestionModal from "./ExistingQuestionModal/ExistingQuestionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, selectModal } from "../../features/ui/uiSlice";
 const MODAL_COMPONENTS = {
-  [MODAL_TYPES.CONFIRMATION]: ConfirmationModal,
+  [MODAL_TYPES.CONFIRMATION]: DeleteConfirmationModal,
   [MODAL_TYPES.EXISTING_QUESTION]: ExistingQuestionModal,
 };
 const GlobalModalManager = () => {

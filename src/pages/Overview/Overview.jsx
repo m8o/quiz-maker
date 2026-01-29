@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { deleteQuiz, fetchQuizzes } from "../../features/quizzes/quizzesSlice";
-import ConfirmationModal from "../../components/ConfirmationModal/ConfirmationModal";
+import DeleteConfirmationModal from "../../components/modals/DeleteConfirmationModal/DeleteConfirmationModal";
 
 const Overview = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const Overview = () => {
         ) : (
           <Typography>No quizzes available.</Typography>
         )}
-        <ConfirmationModal
+        <DeleteConfirmationModal
           open={isModalOpen}
           onClose={closeModalHandler}
           onConfirm={onConfirmDeletionHandler}
