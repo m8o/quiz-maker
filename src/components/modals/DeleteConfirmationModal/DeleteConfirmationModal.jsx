@@ -8,16 +8,12 @@ import {
   Button,
 } from "@mui/material";
 
-const ConfirmationModal = ({ open, onClose, onConfirm, title, message }) => {
+const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>
-        {title || "Are you sure you want to delete this quiz?"}
-      </DialogTitle>
+      <DialogTitle>Are you sure you want to delete this quiz?</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          {message || "This action cannot be undone."}
-        </DialogContentText>
+        <DialogContentText>This action cannot be undone.</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
@@ -35,4 +31,4 @@ const ConfirmationModal = ({ open, onClose, onConfirm, title, message }) => {
   );
 };
 
-export default ConfirmationModal;
+export default DeleteConfirmationModal;
