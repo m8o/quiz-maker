@@ -6,32 +6,28 @@ import { IconButton, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { deleteQuiz, fetchQuizzes } from "../../features/quizzes/quizzesSlice";
-import DeleteConfirmationModal from "../../components/modals/DeleteConfirmationModal/DeleteConfirmationModal";
+import useUiController from "../../hooks/useUiController/useUiController";
 
 const Overview = () => {
+  const { openConfirmationModal } = useUiController();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [deletionQuizID, setDeletionQuizID] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { items: quizzes } = useSelector((state) => state.quizzes);
   useEffect(() => {
     dispatch(fetchQuizzes());
   }, [dispatch]);
+  const onConfirmDeletionHandler = (deletionQuizID) => {
+    dispatch(deleteQuiz(deletionQuizID));
+    //Polish: Loading state could be added here to improve UX
+  };
   const openModalHandler = (e, quizID) => {
     e.stopPropagation();
-    setIsModalOpen(true);
-    setDeletionQuizID(quizID);
-  };
-  const closeModalHandler = () => {
-    setIsModalOpen(false);
-    setDeletionQuizID(null);
-  };
-  const onConfirmDeletionHandler = () => {
-    dispatch(deleteQuiz(deletionQuizID));
-    closeModalHandler();
-    //Polish: Loading state could be added here to improve UX
+    openConfirmationModal({
+      onConfirm: onConfirmDeletionHandler,
+      quizID: quizID,
+    });
   };
   const editNavigatehandler = (e, quizID) => {
     e.stopPropagation();
@@ -62,11 +58,6 @@ const Overview = () => {
         ) : (
           <Typography>No quizzes available.</Typography>
         )}
-        <DeleteConfirmationModal
-          open={isModalOpen}
-          onClose={closeModalHandler}
-          onConfirm={onConfirmDeletionHandler}
-        />
       </Paper>
     </>
   );

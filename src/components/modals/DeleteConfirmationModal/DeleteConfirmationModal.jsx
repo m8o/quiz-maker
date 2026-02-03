@@ -1,4 +1,4 @@
-import globalStyles from "../../global.module.scss";
+import globalStyles from "../../../global.module.scss";
 import {
   Dialog,
   DialogTitle,
@@ -8,7 +8,13 @@ import {
   Button,
 } from "@mui/material";
 
-const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({ open, onClose, onConfirm, quizID }) => {
+  const handleConfirm = () => {
+    if (onConfirm) {
+      onConfirm(quizID);
+    }
+    onClose();
+  };
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Are you sure you want to delete this quiz?</DialogTitle>
@@ -23,7 +29,12 @@ const DeleteConfirmationModal = ({ open, onClose, onConfirm }) => {
         >
           Cancel
         </Button>
-        <Button onClick={onConfirm} color="error" variant="contained" autoFocus>
+        <Button
+          onClick={handleConfirm}
+          color="error"
+          variant="contained"
+          autoFocus
+        >
           Confirm
         </Button>
       </DialogActions>

@@ -6,15 +6,15 @@ import { useDispatch } from "react-redux";
 const useUiController = () => {
   const dispatch = useDispatch();
   const openConfirmationModal = useCallback(
-    ({ onConfirm }) => {
+    ({ onConfirm, quizID }) => {
       dispatch(
         openModalAction({
           modalType: MODAL_TYPES.CONFIRMATION,
-          modalProps: { onConfirm },
-        })
+          modalProps: { onConfirm, quizID },
+        }),
       );
     },
-    [dispatch]
+    [dispatch],
   );
   const openExistingQuestionModal = useCallback(
     ({ onConfirm }) => {
@@ -22,10 +22,10 @@ const useUiController = () => {
         openModalAction({
           modalType: MODAL_TYPES.EXISTING_QUESTION,
           modalProps: { onConfirm },
-        })
+        }),
       );
     },
-    [dispatch]
+    [dispatch],
   );
   const closeModal = useCallback(() => {
     dispatch(closeModalAction());
