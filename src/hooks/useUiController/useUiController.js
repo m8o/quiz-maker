@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { closeModalAction, openModalAction } from "../../features/ui/uiSlice";
 import { MODAL_TYPES } from "../../features/ui/modalTypes";
 import { useDispatch } from "react-redux";
+import { deleteQuiz } from "../../features/quizzes/quizzesSlice";
 
 const useUiController = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,12 @@ const useUiController = () => {
       dispatch(
         openModalAction({
           modalType: MODAL_TYPES.CONFIRMATION,
-          modalProps: { quizID },
+          modalProps: {
+            onConfirm: () => dispatch(deleteQuiz(quizID)),
+            title: "Are you sure you want to delete this quiz?",
+            message: "This will permanently remove the quiz.",
+            confirmText: "Delete",
+          },
         }),
       );
     },

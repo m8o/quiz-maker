@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import globalStyles from "../../../global.module.scss";
 import {
   Dialog,
@@ -8,21 +7,25 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { deleteQuiz } from "../../../features/quizzes/quizzesSlice";
 
-const DeleteConfirmationModal = ({ open, onClose, quizID }) => {
-  const dispatch = useDispatch();
+const ConfirmationModal = ({
+  open,
+  onClose,
+  onConfirm,
+  title,
+  message,
+  confirmText = "Confirm",
+  cancelText = "Cancel",
+}) => {
   const handleConfirm = () => {
-    if (typeof quizID === "number") {
-      dispatch(deleteQuiz(quizID));
-    }
+    if (onConfirm) onConfirm();
     onClose();
   };
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Are you sure you want to delete this quiz?</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText>This action cannot be undone.</DialogContentText>
+        <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
@@ -30,7 +33,7 @@ const DeleteConfirmationModal = ({ open, onClose, quizID }) => {
           variant="outlined"
           className={globalStyles.cancelButton}
         >
-          Cancel
+          {cancelText}
         </Button>
         <Button
           onClick={handleConfirm}
@@ -38,11 +41,11 @@ const DeleteConfirmationModal = ({ open, onClose, quizID }) => {
           variant="contained"
           autoFocus
         >
-          Confirm
+          {confirmText}
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default DeleteConfirmationModal;
+export default ConfirmationModal;

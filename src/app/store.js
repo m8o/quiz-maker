@@ -7,4 +7,11 @@ export const store = configureStore({
     quizzes: quizzesReducer,
     ui: uiReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredPaths: ["ui.modal.props"],
+        ignoredActions: ["ui/openModal"],
+      },
+    }),
 });
