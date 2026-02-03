@@ -7,18 +7,27 @@ import {
   DialogActions,
   Button,
   Autocomplete,
+  TextField,
 } from "@mui/material";
 
 const existingQuestions = [
-  { id: "q1", text: "What is React?" },
-  { id: "q2", text: "Explain Redux Toolkit." },
-  { id: "q3", text: "How does useEffect work?" },
+  { id: "q1", question: "What is React?", answer: "A JavaScript library." },
+  {
+    id: "q2",
+    question: "What is Redux Toolkit?",
+    answer: "A set of tools for efficient Redux development.",
+  },
+  {
+    id: "q3",
+    question: "How does useEffect work?",
+    answer: "It runs side effects in functional components.",
+  },
 ];
-const ExistingQuestionModal = ({ open, onClose }) => {
-  const [selectedId, setSelectedId] = useState(null);
+const ExistingQuestionModal = ({ open, onClose, onConfirm }) => {
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
   const handleAddQuestion = () => {
-    if (selectedId) {
-      // TODO: Add question to quiz form state using redux
+    if (onConfirm && selectedQuestion) {
+      onConfirm(selectedQuestion);
     }
     onClose();
   };
@@ -27,18 +36,26 @@ const ExistingQuestionModal = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Select an existing question to add to your quiz</DialogTitle>
       <DialogContent>
-        {/*TODO Add select field with virtualised list of options and search (autocomplete input) */}
-        {/* <Autocomplete
+        <Autocomplete
           options={existingQuestions}
-          value={selectedId}
+          getOptionLabel={(option) => option.question}
+          value={selectedQuestion}
           onChange={(event, value, reason) => {
             if (reason === "selectOption" && value) {
-              setSelectedId(value.id);
+              setSelectedQuestion(value);
             } else if (reason === "clear" || !value) {
-              setSelectedId(null);
+              setSelectedQuestion(null);
             }
           }}
-        /> */}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search Questions"
+              margin="dense"
+              variant="outlined"
+            />
+          )}
+        />
       </DialogContent>
       <DialogActions>
         <Button
@@ -52,6 +69,7 @@ const ExistingQuestionModal = ({ open, onClose }) => {
           onClick={handleAddQuestion}
           color="success"
           variant="contained"
+          disabled={!selectedQuestion}
           autoFocus
         >
           Add

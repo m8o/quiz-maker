@@ -23,7 +23,9 @@ const QuizForm = ({
   const [quizName, setQuizName] = useState(initialQuizName);
   const [questions, setQuestions] = useState(initialQuestions);
   const navigate = useNavigate();
-
+  const addQuestionHandler = (question = { id: Date.now() }) => {
+    setQuestions((currentQuestions) => [...currentQuestions, question]);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await handleRequest({ name: quizName, questions, id });
@@ -116,13 +118,15 @@ const QuizForm = ({
         <Box display="flex" gap={1} className={styles.addButtons}>
           <Button
             className={styles.addQuestionButton}
-            onClick={() => setQuestions([...questions, { id: Date.now() }])}
+            onClick={addQuestionHandler}
           >
             <Typography variant="button">add new question</Typography>
           </Button>
           <Button
             className={styles.addQuestionButton}
-            onClick={openExistingQuestionModal}
+            onClick={() =>
+              openExistingQuestionModal({ onConfirm: addQuestionHandler })
+            }
           >
             <Typography variant="button">
               add from existing questions
