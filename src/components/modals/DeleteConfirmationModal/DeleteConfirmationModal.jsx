@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import globalStyles from "../../../global.module.scss";
 import {
   Dialog,
@@ -7,11 +8,13 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
+import { deleteQuiz } from "../../../features/quizzes/quizzesSlice";
 
-const DeleteConfirmationModal = ({ open, onClose, onConfirm, quizID }) => {
+const DeleteConfirmationModal = ({ open, onClose, quizID }) => {
+  const dispatch = useDispatch();
   const handleConfirm = () => {
-    if (onConfirm) {
-      onConfirm(quizID);
+    if (typeof quizID === "number") {
+      dispatch(deleteQuiz(quizID));
     }
     onClose();
   };

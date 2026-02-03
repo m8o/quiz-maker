@@ -6,11 +6,11 @@ import { useDispatch } from "react-redux";
 const useUiController = () => {
   const dispatch = useDispatch();
   const openConfirmationModal = useCallback(
-    ({ onConfirm, quizID }) => {
+    ({ quizID }) => {
       dispatch(
         openModalAction({
           modalType: MODAL_TYPES.CONFIRMATION,
-          modalProps: { onConfirm, quizID },
+          modalProps: { quizID },
         }),
       );
     },

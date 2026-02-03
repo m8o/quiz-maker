@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { deleteQuiz, fetchQuizzes } from "../../features/quizzes/quizzesSlice";
+import { fetchQuizzes } from "../../features/quizzes/quizzesSlice";
 import useUiController from "../../hooks/useUiController/useUiController";
 
 const Overview = () => {
@@ -18,14 +18,10 @@ const Overview = () => {
   useEffect(() => {
     dispatch(fetchQuizzes());
   }, [dispatch]);
-  const onConfirmDeletionHandler = (deletionQuizID) => {
-    dispatch(deleteQuiz(deletionQuizID));
-    //Polish: Loading state could be added here to improve UX
-  };
+
   const openModalHandler = (e, quizID) => {
     e.stopPropagation();
     openConfirmationModal({
-      onConfirm: onConfirmDeletionHandler,
       quizID: quizID,
     });
   };
