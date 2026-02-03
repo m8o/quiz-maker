@@ -16,17 +16,13 @@ const useUiController = () => {
     },
     [dispatch],
   );
-  const openExistingQuestionModal = useCallback(
-    ({ onConfirm }) => {
-      dispatch(
-        openModalAction({
-          modalType: MODAL_TYPES.EXISTING_QUESTION,
-          modalProps: { onConfirm },
-        }),
-      );
-    },
-    [dispatch],
-  );
+  const openExistingQuestionModal = useCallback(() => {
+    dispatch(
+      openModalAction({
+        modalType: MODAL_TYPES.EXISTING_QUESTION,
+      }),
+    );
+  }, [dispatch]);
   const closeModal = useCallback(() => {
     dispatch(closeModalAction());
   }, [dispatch]);

@@ -12,12 +12,14 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import DeleteIcon from "@mui/icons-material/Delete";
+import useUiController from "../../hooks/useUiController/useUiController";
 
 const QuizForm = ({
   title,
   quizData: { name: initialQuizName, questions: initialQuestions, id } = {},
   handleRequest,
 }) => {
+  const { openExistingQuestionModal } = useUiController();
   const [quizName, setQuizName] = useState(initialQuizName);
   const [questions, setQuestions] = useState(initialQuestions);
   const navigate = useNavigate();
@@ -40,7 +42,7 @@ const QuizForm = ({
       currentQuestions.map((question, i) => {
         if (i === index) return { ...question, [name]: value };
         return question;
-      })
+      }),
     );
   };
   return (
@@ -120,7 +122,7 @@ const QuizForm = ({
           </Button>
           <Button
             className={styles.addQuestionButton}
-            onClick={() => setQuestions([...questions, { id: Date.now() }])}
+            onClick={openExistingQuestionModal}
           >
             <Typography variant="button">
               add from existing questions
