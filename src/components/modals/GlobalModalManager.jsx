@@ -1,9 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { MODAL_TYPES } from "../../features/ui/modalTypes";
-import ConfirmationModal from "./ConfirmationModal/ConfirmationModal";
-import ExistingQuestionModal from "./ExistingQuestionModal/ExistingQuestionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModalAction, selectModal } from "../../features/ui/uiSlice";
+import { Box, CircularProgress } from "@mui/material";
+const ConfirmationModal = React.lazy(
+  () => import("./ConfirmationModal/ConfirmationModal"),
+);
+const ExistingQuestionModal = React.lazy(
+  () => import("./ExistingQuestionModal/ExistingQuestionModal"),
+);
 const MODAL_COMPONENTS = {
   [MODAL_TYPES.CONFIRMATION]: ConfirmationModal,
   [MODAL_TYPES.EXISTING_QUESTION]: ExistingQuestionModal,
@@ -22,13 +27,28 @@ const GlobalModalManager = () => {
     dispatch(closeModalAction());
   };
   return (
-    <ModalComponent
-      onClose={handleClose}
-      //TODO open left for implementation of smooth exit animation. For now value is hardcoded and later will be managed via state.
-      open={true}
-      {...modalProps}
-    />
+    <Suspense fallback={<LoadingSpinner />}>
+      <ModalComponent
+        onClose={handleClose}
+        //TODO open left for implementation of smooth exit animation. For now value is hardcoded and later will be managed via state.
+        open={true}
+        {...modalProps}
+      />
+    </Suspense>
   );
 };
+const LoadingSpinner = () => (
+  <Box
+    sx={{
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      zIndex: 9999,
+    }}
+  >
+    <CircularProgress />
+  </Box>
+);
 
 export default GlobalModalManager;
