@@ -1,3 +1,4 @@
+@use "../../theme-vars.scss" as theme;
 .overview {
   position: relative;
   padding-top: 25px;
@@ -7,11 +8,11 @@
   position: fixed;
   bottom: 40px;
   right: 35px;
-  background-color: var(--mui-palette-primary-main);
-  color: var(--mui-palette-primary-contrastText);
-  box-shadow: var(--mui-shadows-1);
+  background-color: theme.$primary;
+  color: theme.$primary-contrastText;
+  box-shadow: theme.$shadow-sm;
   &:hover {
-    background-color: var(--mui-palette-primary-dark);
-    box-shadow: var(--mui-shadows-4);
+    background-color: theme.$primary-dark;
+    box-shadow: theme.$shadow-md;
   }
 }

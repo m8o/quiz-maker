@@ -1,4 +1,6 @@
 @use "./_mixins.scss" as *;
+@use "./_theme-vars.scss" as theme;
+
 .contentPaper {
   margin: 12px;
   padding: 25px 25px 50px 25px;
@@ -6,20 +8,24 @@
   flex-direction: column;
   flex-grow: 1;
   gap: 12px;
-  border-radius: var(--mui-shape-borderRadius);
+  border-radius: theme.$radius;
   @include tablet {
     margin: 25px;
     padding: 50px;
   }
 }
+
 .cancelButton {
-  background-color: var(--mui-palette-background-default);
+  background-color: theme.$bg-default;
 }
+
 .roundActionButton {
-  background-color: var(--mui-palette-background-button);
-  transition: background-color 0.2s, transform 0.1s;
+  background-color: theme.$bg-button;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
   &:hover {
-    box-shadow: var(--mui-shadows-4);
+    box-shadow: theme.$shadow-md;
   }
   &:active {
     transform: scale(0.95);

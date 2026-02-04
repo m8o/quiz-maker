@@ -1,7 +1,10 @@
 @use "../../mixins.scss" as *;
+@use "../../theme-vars.scss" as theme;
+
 .deleteButton {
-  color: var(--mui-palette-error-main);
+  color: theme.$error;
 }
+
 .addQuestionButton {
   min-height: 50px;
   padding: 0;
@@ -9,14 +12,15 @@
   display: flex;
   justify-content: center;
   margin: auto;
-  border: 1px dashed var(--mui-palette-divider);
+  border: 1px dashed theme.$divider;
   &:hover {
-    background-color: var(--mui-palette-action-hover);
+    background-color: theme.$action-hover;
   }
 }
+
 .card {
   max-width: 1200px;
-  background-color: var(--mui-palette-background-card);
+  background-color: theme.$bg-card;
   width: 100%;
   margin: auto;
   &.nameCard {
@@ -26,6 +30,7 @@
     margin-bottom: 16px;
   }
 }
+
 .cardTitle {
   margin-bottom: 16px;
   .nameCard & {
@@ -33,6 +38,7 @@
     margin: 0px auto 16px;
   }
 }
+
 .addButtons {
   flex-direction: column;
   margin-bottom: 24px;
@@ -46,13 +52,15 @@
     }
   }
 }
+
 .actionButtons {
   display: flex;
   justify-content: flex-end;
   max-width: 1200px;
   margin: auto;
 }
+
 .cancelButton {
-  background-color: var(--mui-palette-background-default);
+  background-color: theme.$bg-default;
   max-width: 120px;
 }
