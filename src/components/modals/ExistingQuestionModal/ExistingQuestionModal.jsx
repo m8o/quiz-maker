@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import globalStyles from "../../../global.module.scss";
 import {
   Dialog,
@@ -9,21 +9,14 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchQuestions } from "../../../features/questions/questionsSlice";
 
-const existingQuestions = [
-  { id: "q1", question: "What is React?", answer: "A JavaScript library." },
-  {
-    id: "q2",
-    question: "What is Redux Toolkit?",
-    answer: "A set of tools for efficient Redux development.",
-  },
-  {
-    id: "q3",
-    question: "How does useEffect work?",
-    answer: "It runs side effects in functional components.",
-  },
-];
 const ExistingQuestionModal = ({ open, onClose, onConfirm }) => {
+  const dispatch = useDispatch();
+  const { items: existingQuestions, status } = useSelector(
+    (state) => state.questions,
+  );
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const handleAddQuestion = () => {
     if (onConfirm && selectedQuestion) {
@@ -31,6 +24,11 @@ const ExistingQuestionModal = ({ open, onClose, onConfirm }) => {
     }
     onClose();
   };
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchQuestions());
+    }
+  }, [dispatch]);
 
   return (
     <Dialog open={open} onClose={onClose}>

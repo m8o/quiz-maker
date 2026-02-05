@@ -1,6 +1,6 @@
 import globalStyles from "../../global.module.scss";
 import styles from "./QuizForm.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -13,12 +13,15 @@ import {
 import { useNavigate } from "react-router";
 import DeleteIcon from "@mui/icons-material/Delete";
 import useUiController from "../../hooks/useUiController/useUiController";
+import { resetQuestionsStateAction } from "../../features/questions/questionsSlice";
+import { useDispatch } from "react-redux";
 
 const QuizForm = ({
   title,
   quizData: { name: initialQuizName, questions: initialQuestions, id } = {},
   handleRequest,
 }) => {
+  const dispatch = useDispatch();
   const { openExistingQuestionModal } = useUiController();
   const [quizName, setQuizName] = useState(initialQuizName);
   const [questions, setQuestions] = useState(initialQuestions);
@@ -47,6 +50,12 @@ const QuizForm = ({
       }),
     );
   };
+  useEffect(() => {
+    return () => {
+      dispatch(resetQuestionsStateAction());
+    };
+  }, [dispatch]);
+
   return (
     <>
       <Button
@@ -118,7 +127,7 @@ const QuizForm = ({
         <Box display="flex" gap={1} className={styles.addButtons}>
           <Button
             className={styles.addQuestionButton}
-            onClick={addQuestionHandler}
+            onClick={() => addQuestionHandler()}
           >
             <Typography variant="button">add new question</Typography>
           </Button>
