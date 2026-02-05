@@ -1,7 +1,7 @@
 import { lazy } from "react";
-import EditQuiz from "../pages/EditQuiz/EditQuiz";
 const Overview = lazy(() => import("../pages/Overview/Overview"));
 const CreateQuiz = lazy(() => import("../pages/CreateQuiz/CreateQuiz"));
+const EditQuiz = lazy(() => import("../pages/EditQuiz/EditQuiz"));
 
 const routes = [
   {

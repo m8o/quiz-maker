@@ -1,6 +1,6 @@
 import globalStyles from "../../global.module.scss";
 import styles from "./QuizForm.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -12,16 +12,23 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import DeleteIcon from "@mui/icons-material/Delete";
+import useUiController from "../../hooks/useUiController/useUiController";
+import { resetQuestionsStateAction } from "../../features/questions/questionsSlice";
+import { useDispatch } from "react-redux";
 
 const QuizForm = ({
   title,
   quizData: { name: initialQuizName, questions: initialQuestions, id } = {},
   handleRequest,
 }) => {
+  const dispatch = useDispatch();
+  const { openExistingQuestionModal } = useUiController();
   const [quizName, setQuizName] = useState(initialQuizName);
   const [questions, setQuestions] = useState(initialQuestions);
   const navigate = useNavigate();
-
+  const addQuestionHandler = (question = { id: Date.now() }) => {
+    setQuestions((currentQuestions) => [...currentQuestions, question]);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const success = await handleRequest({ name: quizName, questions, id });
@@ -40,9 +47,15 @@ const QuizForm = ({
       currentQuestions.map((question, i) => {
         if (i === index) return { ...question, [name]: value };
         return question;
-      })
+      }),
     );
   };
+  useEffect(() => {
+    return () => {
+      dispatch(resetQuestionsStateAction());
+    };
+  }, [dispatch]);
+
   return (
     <>
       <Button
@@ -110,12 +123,25 @@ const QuizForm = ({
               </CardContent>
             </Card>
           ))}
-        <Button
-          className={styles.addQuestionButton}
-          onClick={() => setQuestions([...questions, {}])}
-        >
-          <Typography variant="h4">+</Typography>
-        </Button>
+
+        <Box display="flex" gap={1} className={styles.addButtons}>
+          <Button
+            className={styles.addQuestionButton}
+            onClick={() => addQuestionHandler()}
+          >
+            <Typography variant="button">add new question</Typography>
+          </Button>
+          <Button
+            className={styles.addQuestionButton}
+            onClick={() =>
+              openExistingQuestionModal({ onConfirm: addQuestionHandler })
+            }
+          >
+            <Typography variant="button">
+              add from existing questions
+            </Typography>
+          </Button>
+        </Box>
         <Box display="flex" gap={1} className={styles.actionButtons}>
           <Button
             className={styles.createQuizButton}

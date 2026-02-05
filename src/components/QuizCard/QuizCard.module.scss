@@ -1,3 +1,4 @@
+@use "../../theme-vars.scss" as theme;
 .cardContainer {
   max-width: 1200px;
   width: 100%;
@@ -6,18 +7,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: var(--mui-shape-borderRadius);
-  background-color: var(--mui-palette-background-card);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: theme.$radius;
+  background-color: theme.$bg-card;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   &:hover {
     transform: translateY(-2px);
-    box-shadow: var(--mui-shadows-4);
-    border-color: var(--mui-palette-primary-main);
+
+    box-shadow: theme.$shadow-md;
+    border-color: theme.$primary;
   }
 }
 
 .title {
-  color: var(--mui-palette-text-primary);
+  color: theme.$text-primary;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -25,11 +29,11 @@
 }
 
 .playActionButton {
-  color: var(--mui-palette-success-main);
+  color: theme.$success;
 }
 .editActionButton {
-  color: var(--mui-palette-primary-main);
+  color: theme.$primary;
 }
 .deleteActionButton {
-  color: var(--mui-palette-error-main);
+  color: theme.$error;
 }
